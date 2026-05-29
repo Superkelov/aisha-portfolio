@@ -114,7 +114,7 @@ html, body, .page, .frame, .bgimg, .scrim{
 }
 
 .frame{ overflow:hidden; background:var(--paper-2); position:relative; }
-.frame img{ width:100%; height:100%; object-fit:cover; }
+.frame img{ width:100%; height:100%; object-fit:cover; object-position:center 65%; }
 
 /* ============================================================
    COVER
