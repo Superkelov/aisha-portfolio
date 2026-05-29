@@ -10,8 +10,18 @@
 <link rel="stylesheet" href="assets/portfolio.css">
 </head>
 <body>
-<div class="scaler">
-<div class="wrap">
+
+<!-- Custom cursor -->
+<div class="custom-cursor" id="cursor"></div>
+
+<!-- Navigation dots -->
+<nav class="nav-dots" id="navDots"></nav>
+
+<!-- Progress bar -->
+<div class="progress-bar" id="progressBar"></div>
+
+<div class="scaler" id="scaler">
+<div class="wrap" id="wrap">
 
   <!-- ============================== COVER ============================== -->
   <section class="page cover" data-screen-label="Cover">
@@ -295,45 +305,130 @@
 </div>
 
 <script>
-  // Scale the page sheets to fit the viewport on screen (no effect in print).
-  (function () {
-    var PAGE_W = 297 / 25.4 * 96; // 297mm in CSS px
-    var scaler = document.querySelector('.scaler');
-    var wrap = document.querySelector('.wrap');
-    function fit() {
-      if (window.matchMedia && window.matchMedia('print').matches) return;
-      var avail = window.innerWidth - 24;
-      var scale = Math.min(1, avail / PAGE_W);
-      wrap.style.transform = 'scale(' + scale + ')';
-      wrap.style.transformOrigin = 'top center';
-      scaler.style.height = (wrap.scrollHeight * scale) + 'px';
-    }
-    window.addEventListener('resize', fit);
-    if (document.fonts && document.fonts.ready) { document.fonts.ready.then(fit); }
-    window.addEventListener('load', fit);
-    fit();
-  })();
+(function(){
+  var scaler = document.getElementById('scaler');
+  var pages = document.querySelectorAll('.page');
+  var cursor = document.getElementById('cursor');
+  var navDots = document.getElementById('navDots');
+  var progressBar = document.getElementById('progressBar');
+  var totalPages = pages.length;
+  var currentPage = 0;
+  var cursorX = 0, cursorY = 0, cursorRealX = 0, cursorRealY = 0;
 
-  // Scroll-triggered reveal animations
-  (function () {
-    var pages = document.querySelectorAll('.page:not(.cover)');
-    if (!('IntersectionObserver' in window)) {
-      pages.forEach(function (p) { p.classList.add('visible'); });
-      return;
+  // ---- Build nav dots ----
+  pages.forEach(function(p, i){
+    var dot = document.createElement('div');
+    dot.className = 'nav-dot' + (i === 0 ? ' active' : '');
+    var label = document.createElement('span');
+    label.className = 'nav-dot-label';
+    label.textContent = p.getAttribute('data-screen-label') || ('Page ' + (i+1));
+    dot.appendChild(label);
+    dot.addEventListener('click', function(){
+      pages[i].scrollIntoView({ behavior:'smooth', block:'nearest', inline:'start' });
+    });
+    navDots.appendChild(dot);
+  });
+  var dots = navDots.querySelectorAll('.nav-dot');
+
+  // ---- Scroll → wheel redirect (vertical wheel → horizontal scroll) ----
+  scaler.addEventListener('wheel', function(e){
+    if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+      e.preventDefault();
+      scaler.scrollLeft += e.deltaY * 1.5;
     }
-    var observer = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        if (e.isIntersecting) {
-          e.target.classList.add('visible');
-          observer.unobserve(e.target);
-        }
+  }, { passive: false });
+
+  // ---- Keyboard navigation ----
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+      e.preventDefault();
+      if (currentPage < totalPages - 1) pages[currentPage + 1].scrollIntoView({ behavior:'smooth', inline:'start' });
+    } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+      e.preventDefault();
+      if (currentPage > 0) pages[currentPage - 1].scrollIntoView({ behavior:'smooth', inline:'start' });
+    }
+  });
+
+  // ---- Intersection Observer for active page ----
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      var idx = Array.prototype.indexOf.call(pages, e.target);
+      if (e.isIntersecting && e.intersectionRatio > 0.5) {
+        currentPage = idx;
+        e.target.classList.add('visible');
+        dots.forEach(function(d,i){ d.classList.toggle('active', i === idx); });
+      }
+    });
+  }, { root: scaler, threshold: 0.5 });
+  pages.forEach(function(p){ io.observe(p); });
+
+  // Cover always visible
+  pages[0].classList.add('visible');
+
+  // ---- Progress bar ----
+  scaler.addEventListener('scroll', function(){
+    var maxScroll = scaler.scrollWidth - scaler.clientWidth;
+    var pct = maxScroll > 0 ? (scaler.scrollLeft / maxScroll) * 100 : 0;
+    progressBar.style.width = pct + '%';
+  });
+
+  // ---- Custom cursor ----
+  document.addEventListener('mousemove', function(e){
+    cursorRealX = e.clientX;
+    cursorRealY = e.clientY;
+    cursor.classList.add('visible');
+  });
+  document.addEventListener('mouseleave', function(){
+    cursor.classList.remove('visible');
+  });
+
+  function animateCursor(){
+    cursorX += (cursorRealX - cursorX) * 0.15;
+    cursorY += (cursorRealY - cursorY) * 0.15;
+    cursor.style.left = cursorX + 'px';
+    cursor.style.top = cursorY + 'px';
+    requestAnimationFrame(animateCursor);
+  }
+  animateCursor();
+
+  // Cursor hover states
+  document.addEventListener('mouseover', function(e){
+    if (e.target.closest('.frame')) {
+      cursor.classList.add('hover-frame');
+    } else if (e.target.closest('.nav-dot')) {
+      cursor.classList.add('hover-nav');
+    }
+  });
+  document.addEventListener('mouseout', function(e){
+    if (e.target.closest('.frame')) cursor.classList.remove('hover-frame');
+    if (e.target.closest('.nav-dot')) cursor.classList.remove('hover-nav');
+  });
+
+  // ---- Parallax on images ----
+  var frames = document.querySelectorAll('.frame img');
+  var parallaxStrength = 15;
+
+  function updateParallax(){
+    var scrollLeft = scaler.scrollLeft;
+    var viewW = scaler.clientWidth;
+
+    pages.forEach(function(page){
+      var rect = page.getBoundingClientRect();
+      if (rect.right < -viewW || rect.left > viewW * 2) return;
+
+      var progress = (rect.left / viewW);
+      var imgs = page.querySelectorAll('.frame img');
+      imgs.forEach(function(img, i){
+        var offset = progress * parallaxStrength * (1 + i * 0.3);
+        img.style.transform = 'translateX(' + offset + 'px) scale(1.08)';
       });
-    }, { threshold: 0.18 });
-    pages.forEach(function (p) { observer.observe(p); });
+    });
 
-    // Cover is always visible (uses CSS keyframes)
-    document.querySelector('.cover').classList.add('visible');
-  })();
+    requestAnimationFrame(updateParallax);
+  }
+  updateParallax();
+
+})();
 </script>
 </body>
 </html>
