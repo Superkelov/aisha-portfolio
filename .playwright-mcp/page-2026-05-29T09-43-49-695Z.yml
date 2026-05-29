@@ -1,0 +1,375 @@
+- generic [active] [ref=e1]:
+  - navigation [ref=e2]:
+    - generic [ref=e3]:
+      - generic: Cover
+    - generic [ref=e4]:
+      - generic: Statement
+    - generic [ref=e5]:
+      - generic: Contents
+    - generic [ref=e6]:
+      - generic: 01 Bedroom
+    - generic [ref=e7]:
+      - generic: 02 Living Room
+    - generic [ref=e8]:
+      - generic: 03 Living Room — House
+    - generic [ref=e9]:
+      - generic: 04 Kids Room
+    - generic [ref=e10]:
+      - generic: 05 Karaoke
+    - generic [ref=e11]:
+      - generic: 06 Playroom
+    - generic [ref=e12]:
+      - generic: 07 Lobby
+    - generic [ref=e13]:
+      - generic: 08 Lobby Comfort+
+    - generic [ref=e14]:
+      - generic: 09 Conference Room
+  - generic:
+    - button:
+      - img
+    - button:
+      - img
+    - button:
+      - img
+  - generic [ref=e16]:
+    - generic [ref=e17]:
+      - generic [ref=e18]:
+        - generic [ref=e19]:
+          - generic [ref=e20]: Interior Design — Portfolio
+          - generic [ref=e21]: 2024 — 2026
+        - generic [ref=e22]:
+          - heading "Surpkelova Aisha" [level=1] [ref=e23]:
+            - generic [ref=e24]: Surpkelova
+            - text: Aisha
+          - paragraph [ref=e25]:
+            - text: Interior designer. I make rooms that
+            - emphasis [ref=e26]: hold light
+            - text: — calm, warm and quietly considered, from private residences to the shared spaces of a building.
+        - generic [ref=e27]:
+          - paragraph [ref=e28]: A selected portfolio of interiors & visualisations, arranged chronologically.
+          - generic [ref=e29]:
+            - text: Nine Works · Residences
+            - text: "& Residential Amenities"
+      - generic [ref=e30]:
+        - img "Lounge interior" [ref=e31]
+        - generic [ref=e32]: Lounge · 2025
+    - generic [ref=e33]:
+      - generic [ref=e34]:
+        - generic [ref=e35]: Aisha · Studio
+        - generic [ref=e36]: Statement
+      - generic [ref=e38]:
+        - generic [ref=e39]: On the work
+        - generic [ref=e40]:
+          - paragraph [ref=e41]:
+            - text: I believe a room should feel
+            - emphasis [ref=e42]: settled
+            - text: before it feels styled. My work begins with light, proportion and a small, honest palette of materials —
+            - emphasis [ref=e43]: travertine, oak, plaster, wool
+            - text: — and ends only when a space feels quiet enough to live in.
+          - paragraph [ref=e44]: "The pages that follow gather projects across two worlds I move between: private residences — bedrooms, living rooms, family homes — and the shared interiors of residential buildings, from playrooms and lounges to lobbies and conference rooms. Different briefs, one sensibility: warmth, restraint, and a deep respect for the people who will use the space."
+          - paragraph [ref=e45]: — Aisha
+      - generic [ref=e46]: Aisha · Interior Design
+      - generic [ref=e47]: 02 / 12
+    - generic [ref=e48]:
+      - generic [ref=e49]:
+        - generic [ref=e50]: Aisha · Studio
+        - generic [ref=e51]: Contents
+      - generic [ref=e52]:
+        - heading "Selected Works, 2024 — 2026" [level=2] [ref=e53]
+        - generic [ref=e54]:
+          - generic [ref=e55]:
+            - generic [ref=e56]: "01"
+            - generic [ref=e57]: Bedroom
+            - generic [ref=e58]: Primary Bedroom — Private Residence
+            - generic [ref=e59]: "2024"
+            - generic [ref=e60]: "04"
+          - generic [ref=e61]:
+            - generic [ref=e62]: "02"
+            - generic [ref=e63]: Living Room
+            - generic [ref=e64]: Living Room — Private Apartment
+            - generic [ref=e65]: "2024"
+            - generic [ref=e66]: "05"
+          - generic [ref=e67]:
+            - generic [ref=e68]: "03"
+            - generic [ref=e69]: Living Room — House
+            - generic [ref=e70]: Living & Lounge — Private House
+            - generic [ref=e71]: "2024"
+            - generic [ref=e72]: "06"
+          - generic [ref=e73]:
+            - generic [ref=e74]: "04"
+            - generic [ref=e75]: Kids Room
+            - generic [ref=e76]: Children's Room — Residence Amenity
+            - generic [ref=e77]: "2025"
+            - generic [ref=e78]: "07"
+          - generic [ref=e79]:
+            - generic [ref=e80]: "05"
+            - generic [ref=e81]: Karaoke
+            - generic [ref=e82]: Lounge & Karaoke — Residence Amenity
+            - generic [ref=e83]: "2025"
+            - generic [ref=e84]: "08"
+          - generic [ref=e85]:
+            - generic [ref=e86]: "06"
+            - generic [ref=e87]: Playroom
+            - generic [ref=e88]: Children's Playroom — Residence Amenity
+            - generic [ref=e89]: "2025"
+            - generic [ref=e90]: "09"
+          - generic [ref=e91]:
+            - generic [ref=e92]: "07"
+            - generic [ref=e93]: Lobby
+            - generic [ref=e94]: Lobby — Residential Building
+            - generic [ref=e95]: "2026"
+            - generic [ref=e96]: "10"
+          - generic [ref=e97]:
+            - generic [ref=e98]: "08"
+            - generic [ref=e99]: Lobby Comfort+
+            - generic [ref=e100]: Resident Lounge — Residential Building
+            - generic [ref=e101]: "2026"
+            - generic [ref=e102]: "11"
+          - generic [ref=e103]:
+            - generic [ref=e104]: "09"
+            - generic [ref=e105]: Conference Room
+            - generic [ref=e106]: Conference & Club Room — Residential Building
+            - generic [ref=e107]: "2026"
+            - generic [ref=e108]: "12"
+      - generic [ref=e109]: Aisha · Interior Design
+      - generic [ref=e110]: 03 / 12
+    - generic [ref=e111]:
+      - generic [ref=e112]:
+        - generic [ref=e113]: Aisha · Selected Works
+        - generic [ref=e114]: Primary Bedroom
+      - generic [ref=e115]:
+        - generic [ref=e116]:
+          - generic [ref=e117]: Nº 01
+          - heading "Bedroom" [level=2] [ref=e118]
+          - paragraph [ref=e119]: A floating bed set against a wall of travertine, wrapped in warm indirect light — a bedroom reduced to calm.
+          - generic [ref=e120]:
+            - generic [ref=e121]:
+              - generic [ref=e122]: Typology
+              - generic [ref=e123]: Private Residence
+            - generic [ref=e124]:
+              - generic [ref=e125]: Year
+              - generic [ref=e126]: "2024"
+            - generic [ref=e127]:
+              - generic [ref=e128]: Scope
+              - generic [ref=e129]: Interior · FF&E
+          - generic [ref=e130]:
+            - generic [ref=e131]: Travertine
+            - generic [ref=e132]: Oak
+            - generic [ref=e133]: Linen
+            - generic [ref=e134]: Warm light
+        - generic [ref=e135]:
+          - img "Bedroom view one" [ref=e137]
+          - img "Bedroom dressing nook" [ref=e139]
+          - img "Bedside detail — marble lamp and books" [ref=e141]
+      - generic [ref=e142]: Aisha · Interior Design
+      - generic [ref=e143]: 04 / 12
+    - generic [ref=e144]:
+      - generic [ref=e145]:
+        - generic [ref=e146]: Aisha · Selected Works
+        - generic [ref=e147]: Living Room
+      - generic [ref=e148]:
+        - generic [ref=e149]:
+          - generic [ref=e150]: Nº 02
+          - heading "Living Room" [level=2] [ref=e151]
+          - paragraph [ref=e152]: Houndstooth volumes around a linear fire — a living room that leans into the evening, lit low and soft.
+          - generic [ref=e153]:
+            - generic [ref=e154]:
+              - generic [ref=e155]: Typology
+              - generic [ref=e156]: Private Apartment
+            - generic [ref=e157]:
+              - generic [ref=e158]: Year
+              - generic [ref=e159]: "2024"
+            - generic [ref=e160]:
+              - generic [ref=e161]: Scope
+              - generic [ref=e162]: Interior · FF&E
+          - generic [ref=e163]:
+            - generic [ref=e164]: Houndstooth
+            - generic [ref=e165]: Oak
+            - generic [ref=e166]: Ember
+            - generic [ref=e167]: Track light
+        - generic [ref=e168]:
+          - img "Living room with arc lamp" [ref=e170]
+          - img "Open kitchen and lounge" [ref=e172]
+      - generic [ref=e173]: Aisha · Interior Design
+      - generic [ref=e174]: 05 / 12
+    - generic [ref=e175]:
+      - generic [ref=e176]:
+        - generic [ref=e177]: Aisha · Selected Works
+        - generic [ref=e178]: Living & Lounge
+      - generic [ref=e179]:
+        - generic [ref=e180]:
+          - generic [ref=e181]:
+            - generic [ref=e182]: Nº 03
+            - heading "Living Room — House" [level=2] [ref=e183]
+          - generic [ref=e184]:
+            - paragraph [ref=e185]: Bouclé seating, a stone courtyard tree, and the unhurried quiet of an afternoon spent at home.
+            - generic [ref=e186]:
+              - generic [ref=e187]: Bouclé
+              - generic [ref=e188]: Travertine
+              - generic [ref=e189]: Oak
+        - generic [ref=e190]:
+          - img "House living one" [ref=e192]
+          - img "House living two" [ref=e194]
+          - img "House living three" [ref=e196]
+          - img "House living four" [ref=e198]
+      - generic [ref=e199]: Aisha · Interior Design · 2024
+      - generic [ref=e200]: 06 / 12
+    - generic [ref=e201]:
+      - generic [ref=e202]:
+        - generic [ref=e203]: Aisha · Selected Works
+        - generic [ref=e204]: Children's Studio
+      - generic [ref=e205]:
+        - generic [ref=e206]:
+          - generic [ref=e207]: Nº 04
+          - heading "Kids Room" [level=2] [ref=e208]:
+            - text: Kids
+            - text: Room
+          - paragraph [ref=e209]: A children's room in warm neutrals — a soft slide and ball pit, low round tables, and a cosy reading nook.
+          - generic [ref=e210]:
+            - generic [ref=e211]:
+              - generic [ref=e212]: Typology
+              - generic [ref=e213]: Residence Amenity
+            - generic [ref=e214]:
+              - generic [ref=e215]: Year
+              - generic [ref=e216]: "2025"
+            - generic [ref=e217]:
+              - generic [ref=e218]: Scope
+              - generic [ref=e219]: Concept · Interior
+          - generic [ref=e220]:
+            - generic [ref=e221]: Oak
+            - generic [ref=e222]: Sage
+            - generic [ref=e223]: Felt
+        - generic [ref=e224]:
+          - generic:
+            - img "Play and ball pit"
+          - generic [ref=e225]:
+            - img "Art table and climbing wall" [ref=e227]
+            - img "Giraffe height chart" [ref=e229]
+      - generic [ref=e230]: Aisha · Interior Design
+      - generic [ref=e231]: 07 / 12
+    - generic [ref=e232]:
+      - img "Lounge and karaoke room" [ref=e234]
+      - generic [ref=e236]:
+        - generic [ref=e237]: Aisha · Selected Works
+        - generic [ref=e238]: Lounge & Karaoke
+      - generic [ref=e239]:
+        - generic [ref=e240]: Nº 05
+        - heading "Karaoke" [level=2] [ref=e241]
+        - paragraph [ref=e242]: A jewel-box lounge dressed in walnut and marble — for late nights, and the louder ones.
+        - generic [ref=e243]:
+          - generic [ref=e244]:
+            - generic [ref=e245]: Typology
+            - generic [ref=e246]: Residence Amenity
+          - generic [ref=e247]:
+            - generic [ref=e248]: Year
+            - generic [ref=e249]: "2025"
+          - generic [ref=e250]:
+            - generic [ref=e251]: Scope
+            - generic [ref=e252]: Concept · Interior
+        - generic [ref=e253]:
+          - generic [ref=e254]: Walnut
+          - generic [ref=e255]: Marble
+          - generic [ref=e256]: Brass
+      - generic [ref=e257]: Aisha · Interior Design
+      - generic [ref=e258]: 08 / 12
+    - generic [ref=e259]:
+      - generic [ref=e260]:
+        - generic [ref=e261]: Aisha · Selected Works
+        - generic [ref=e262]: Children's Playroom
+      - generic [ref=e263]:
+        - generic [ref=e264]:
+          - generic [ref=e265]:
+            - generic [ref=e266]: Nº 06
+            - heading "Playroom" [level=2] [ref=e267]
+          - generic [ref=e268]:
+            - paragraph [ref=e269]: "Soft play in warm neutrals: a ball pit, a gentle slide, and tables sized for small hands."
+            - generic [ref=e270]:
+              - generic [ref=e271]: Oak
+              - generic [ref=e272]: Wool
+              - generic [ref=e273]: Travertine
+        - generic [ref=e274]:
+          - img "Playroom tables" [ref=e276]
+          - generic [ref=e277]:
+            - img "Ball pit and slide" [ref=e279]
+            - img "Reading and play nook" [ref=e281]
+      - generic [ref=e282]: Aisha · Interior Design · 2025
+      - generic [ref=e283]: 09 / 12
+    - generic [ref=e284]:
+      - generic [ref=e285]:
+        - generic [ref=e286]: Aisha · Selected Works
+        - generic [ref=e287]: Lobby
+      - generic [ref=e288]:
+        - generic [ref=e289]:
+          - generic [ref=e290]:
+            - generic [ref=e291]: Nº 07
+            - heading "Lobby" [level=2] [ref=e292]
+          - generic [ref=e293]:
+            - paragraph [ref=e294]: An arrival composed in marble and bronze — the first breath of the building, and its calmest.
+            - generic [ref=e295]:
+              - generic [ref=e296]: Marble
+              - generic [ref=e297]: Bronze
+              - generic [ref=e298]: Stone
+        - generic [ref=e299]:
+          - img "Lobby seating and columns" [ref=e301]
+          - img "Lobby mirror detail" [ref=e303]
+      - generic [ref=e304]: Aisha · Interior Design · 2026
+      - generic [ref=e305]: 10 / 12
+    - generic [ref=e306]:
+      - generic [ref=e307]:
+        - generic [ref=e308]: Aisha · Selected Works
+        - generic [ref=e309]: Resident Lounge
+      - generic [ref=e310]:
+        - generic [ref=e311]:
+          - generic [ref=e312]: Nº 08
+          - heading "Lobby Comfort+" [level=2] [ref=e313]:
+            - text: Lobby
+            - text: Comfort+
+          - paragraph [ref=e314]: A resident lounge where book-matched stone, oak and lamplight slow the whole day down.
+          - generic [ref=e315]:
+            - generic [ref=e316]:
+              - generic [ref=e317]: Typology
+              - generic [ref=e318]: Residential Building
+            - generic [ref=e319]:
+              - generic [ref=e320]: Year
+              - generic [ref=e321]: "2026"
+            - generic [ref=e322]:
+              - generic [ref=e323]: Scope
+              - generic [ref=e324]: Interior · FF&E
+          - generic [ref=e325]:
+            - generic [ref=e326]: Stone
+            - generic [ref=e327]: Oak
+            - generic [ref=e328]: Plaster
+        - generic [ref=e329]:
+          - generic [ref=e330]:
+            - img "Lounge seating one" [ref=e332]
+            - img "Lounge seating two" [ref=e334]
+          - generic:
+            - img "Elevator hall"
+      - generic [ref=e335]: Aisha · Interior Design
+      - generic [ref=e336]: 11 / 12
+    - generic [ref=e337]:
+      - img "Conference and club room" [ref=e339]
+      - generic [ref=e341]:
+        - generic [ref=e342]: Aisha · Selected Works
+        - generic [ref=e343]: Conference & Club Room
+      - generic [ref=e344]:
+        - generic [ref=e345]: Nº 09
+        - heading "Conference Room" [level=2] [ref=e346]
+        - paragraph [ref=e347]: One long stone table beneath a ribbon of light — the room where things get decided.
+        - generic [ref=e348]:
+          - generic [ref=e349]:
+            - generic [ref=e350]: Typology
+            - generic [ref=e351]: Residential Building
+          - generic [ref=e352]:
+            - generic [ref=e353]: Year
+            - generic [ref=e354]: "2026"
+          - generic [ref=e355]:
+            - generic [ref=e356]: Scope
+            - generic [ref=e357]: Interior · Lighting
+        - generic [ref=e358]:
+          - generic [ref=e359]: Walnut
+          - generic [ref=e360]: Stone
+          - generic [ref=e361]: Brass
+      - img "Club lounge corner" [ref=e363]
+      - generic [ref=e364]: Aisha · Interior Design
+      - generic [ref=e365]: 12 / 12

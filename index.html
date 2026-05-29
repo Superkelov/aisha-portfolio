@@ -20,6 +20,17 @@
 <!-- Progress bar -->
 <div class="progress-bar" id="progressBar"></div>
 
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox">
+  <div class="lightbox-backdrop" id="lightboxBackdrop"></div>
+  <button class="lightbox-close" id="lightboxClose"><svg viewBox="0 0 24 24"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg></button>
+  <button class="lightbox-nav lightbox-prev" id="lightboxPrev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
+  <button class="lightbox-nav lightbox-next" id="lightboxNext"><svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg></button>
+  <div class="lightbox-counter" id="lightboxCounter"></div>
+  <div class="lightbox-img-wrap"><img id="lightboxImg" src="" alt=""></div>
+  <div class="lightbox-caption" id="lightboxCaption"></div>
+</div>
+
 <div class="scaler" id="scaler">
 <div class="wrap" id="wrap">
 
@@ -314,6 +325,7 @@
   var totalPages = pages.length;
   var currentPage = 0;
   var cursorX = 0, cursorY = 0, cursorRealX = 0, cursorRealY = 0;
+  var lightboxOpen = false;
 
   // ---- Build nav dots ----
   pages.forEach(function(p, i){
@@ -330,8 +342,9 @@
   });
   var dots = navDots.querySelectorAll('.nav-dot');
 
-  // ---- Scroll → wheel redirect (vertical wheel → horizontal scroll) ----
+  // ---- Scroll → wheel redirect ----
   scaler.addEventListener('wheel', function(e){
+    if (lightboxOpen) return;
     if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
       e.preventDefault();
       scaler.scrollLeft += e.deltaY * 1.5;
@@ -340,6 +353,12 @@
 
   // ---- Keyboard navigation ----
   document.addEventListener('keydown', function(e){
+    if (lightboxOpen) {
+      if (e.key === 'Escape') closeLightbox();
+      else if (e.key === 'ArrowRight') lbNav(1);
+      else if (e.key === 'ArrowLeft') lbNav(-1);
+      return;
+    }
     if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
       e.preventDefault();
       if (currentPage < totalPages - 1) pages[currentPage + 1].scrollIntoView({ behavior:'smooth', inline:'start' });
@@ -349,7 +368,7 @@
     }
   });
 
-  // ---- Intersection Observer for active page ----
+  // ---- Intersection Observer ----
   var io = new IntersectionObserver(function(entries){
     entries.forEach(function(e){
       var idx = Array.prototype.indexOf.call(pages, e.target);
@@ -361,8 +380,6 @@
     });
   }, { root: scaler, threshold: 0.5 });
   pages.forEach(function(p){ io.observe(p); });
-
-  // Cover always visible
   pages[0].classList.add('visible');
 
   // ---- Progress bar ----
@@ -391,42 +408,93 @@
   }
   animateCursor();
 
-  // Cursor hover states
   document.addEventListener('mouseover', function(e){
-    if (e.target.closest('.frame')) {
-      cursor.classList.add('hover-frame');
-    } else if (e.target.closest('.nav-dot')) {
-      cursor.classList.add('hover-nav');
-    }
+    if (e.target.closest('.frame')) cursor.classList.add('hover-frame');
+    else if (e.target.closest('.nav-dot') || e.target.closest('.lightbox-nav') || e.target.closest('.lightbox-close')) cursor.classList.add('hover-nav');
   });
   document.addEventListener('mouseout', function(e){
     if (e.target.closest('.frame')) cursor.classList.remove('hover-frame');
-    if (e.target.closest('.nav-dot')) cursor.classList.remove('hover-nav');
+    if (e.target.closest('.nav-dot') || e.target.closest('.lightbox-nav') || e.target.closest('.lightbox-close')) cursor.classList.remove('hover-nav');
   });
 
-  // ---- Parallax on images ----
-  var frames = document.querySelectorAll('.frame img');
-  var parallaxStrength = 15;
-
+  // ---- Parallax ----
+  var parallaxStrength = 12;
   function updateParallax(){
-    var scrollLeft = scaler.scrollLeft;
     var viewW = scaler.clientWidth;
-
     pages.forEach(function(page){
       var rect = page.getBoundingClientRect();
       if (rect.right < -viewW || rect.left > viewW * 2) return;
-
-      var progress = (rect.left / viewW);
+      var progress = rect.left / viewW;
       var imgs = page.querySelectorAll('.frame img');
       imgs.forEach(function(img, i){
-        var offset = progress * parallaxStrength * (1 + i * 0.3);
+        var offset = progress * parallaxStrength * (1 + i * 0.2);
         img.style.transform = 'translateX(' + offset + 'px)';
       });
     });
-
     requestAnimationFrame(updateParallax);
   }
   updateParallax();
+
+  // ---- Lightbox ----
+  var lb = document.getElementById('lightbox');
+  var lbImg = document.getElementById('lightboxImg');
+  var lbCaption = document.getElementById('lightboxCaption');
+  var lbCounter = document.getElementById('lightboxCounter');
+  var allFrameImgs = [];
+  var lbIndex = 0;
+
+  // Collect all clickable images
+  document.querySelectorAll('.frame img, .inset img').forEach(function(img){
+    allFrameImgs.push(img);
+  });
+
+  // Click to open
+  allFrameImgs.forEach(function(img, i){
+    img.parentElement.addEventListener('click', function(){
+      lbIndex = i;
+      openLightbox();
+    });
+  });
+
+  function openLightbox(){
+    var src = allFrameImgs[lbIndex].src;
+    var alt = allFrameImgs[lbIndex].alt || '';
+    lbImg.src = src;
+    lbImg.alt = alt;
+    lbCaption.textContent = alt;
+    lbCounter.textContent = (lbIndex + 1) + ' / ' + allFrameImgs.length;
+    lb.classList.add('open');
+    lightboxOpen = true;
+  }
+
+  function closeLightbox(){
+    lb.classList.remove('open');
+    lightboxOpen = false;
+  }
+
+  function lbNav(dir){
+    lbIndex = (lbIndex + dir + allFrameImgs.length) % allFrameImgs.length;
+    var src = allFrameImgs[lbIndex].src;
+    var alt = allFrameImgs[lbIndex].alt || '';
+    lbImg.style.opacity = '0';
+    lbImg.style.transform = 'scale(.96)';
+    setTimeout(function(){
+      lbImg.src = src;
+      lbImg.alt = alt;
+      lbCaption.textContent = alt;
+      lbCounter.textContent = (lbIndex + 1) + ' / ' + allFrameImgs.length;
+      lbImg.style.opacity = '1';
+      lbImg.style.transform = 'scale(1)';
+    }, 150);
+  }
+
+  document.getElementById('lightboxBackdrop').addEventListener('click', closeLightbox);
+  document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+  document.getElementById('lightboxPrev').addEventListener('click', function(){ lbNav(-1); });
+  document.getElementById('lightboxNext').addEventListener('click', function(){ lbNav(1); });
+
+  // Lightbox image transition
+  lbImg.style.transition = 'opacity .25s ease, transform .25s ease';
 
 })();
 </script>
