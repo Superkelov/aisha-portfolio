@@ -420,7 +420,7 @@
       var imgs = page.querySelectorAll('.frame img');
       imgs.forEach(function(img, i){
         var offset = progress * parallaxStrength * (1 + i * 0.3);
-        img.style.transform = 'translateX(' + offset + 'px) scale(1.08)';
+        img.style.transform = 'translateX(' + offset + 'px)';
       });
     });
 
