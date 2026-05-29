@@ -250,3 +250,220 @@ html, body, .page, .frame, .bgimg, .scrim{
 .closing .contactgrid .lab{ font-size:7pt; letter-spacing:0.22em; text-transform:uppercase; color:var(--muted); margin-bottom:2.5mm; }
 .closing .contactgrid .val{ font-family:var(--serif); font-size:14pt; color:var(--ink); }
 .closing .endmark{ font-family:var(--serif); font-style:italic; font-size:12pt; color:var(--muted); }
+
+/* ============================================================
+   ANIMATIONS
+   ============================================================ */
+
+/* --- base reveal (scroll-triggered) --- */
+.reveal{
+  opacity:0;
+  transform:translateY(28px);
+  transition:opacity .9s cubic-bezier(.16,1,.3,1), transform .9s cubic-bezier(.16,1,.3,1);
+}
+.reveal.visible{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* --- cover entrance --- */
+@keyframes coverNameIn{
+  from{ opacity:0; transform:translateY(40px); }
+  to{ opacity:1; transform:translateY(0); }
+}
+@keyframes coverFadeIn{
+  from{ opacity:0; }
+  to{ opacity:1; }
+}
+@keyframes coverImgIn{
+  from{ opacity:0; transform:scale(1.06); }
+  to{ opacity:1; transform:scale(1); }
+}
+.cover .name{
+  animation:coverNameIn 1.2s cubic-bezier(.16,1,.3,1) .2s both;
+}
+.cover .tag{
+  animation:coverFadeIn .9s ease .6s both;
+}
+.cover .topline{
+  animation:coverFadeIn .7s ease .1s both;
+}
+.cover .baserow{
+  animation:coverFadeIn .7s ease .8s both;
+}
+.cover .right img{
+  animation:coverImgIn 1.6s cubic-bezier(.16,1,.3,1) .3s both;
+}
+.cover .right .vtag{
+  animation:coverFadeIn .6s ease 1s both;
+}
+
+/* --- contents rows stagger --- */
+.crow{
+  opacity:0;
+  transform:translateX(-16px);
+  transition:opacity .6s cubic-bezier(.16,1,.3,1), transform .6s cubic-bezier(.16,1,.3,1);
+}
+.contents.visible .crow{
+  opacity:1;
+  transform:translateX(0);
+}
+.contents.visible .crow:nth-child(1){ transition-delay:.08s; }
+.contents.visible .crow:nth-child(2){ transition-delay:.14s; }
+.contents.visible .crow:nth-child(3){ transition-delay:.20s; }
+.contents.visible .crow:nth-child(4){ transition-delay:.26s; }
+.contents.visible .crow:nth-child(5){ transition-delay:.32s; }
+.contents.visible .crow:nth-child(6){ transition-delay:.38s; }
+.contents.visible .crow:nth-child(7){ transition-delay:.44s; }
+.contents.visible .crow:nth-child(8){ transition-delay:.50s; }
+.contents.visible .crow:nth-child(9){ transition-delay:.56s; }
+
+/* --- image hover --- */
+@media (hover:hover){
+  .frame img{
+    transition:transform .7s cubic-bezier(.16,1,.3,1);
+  }
+  .frame:hover img{
+    transform:scale(1.04);
+  }
+}
+
+/* --- titleblock slide --- */
+.titleblock{
+  opacity:0;
+  transform:translateX(-20px);
+  transition:opacity .8s cubic-bezier(.16,1,.3,1), transform .8s cubic-bezier(.16,1,.3,1);
+  transition-delay:.15s;
+}
+.visible .titleblock{
+  opacity:1;
+  transform:translateX(0);
+}
+
+/* --- images stagger --- */
+.imgs .frame{
+  opacity:0;
+  transform:translateY(20px);
+  transition:opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1);
+}
+.visible .imgs .frame:nth-child(1){ transition-delay:.2s; }
+.visible .imgs .frame:nth-child(2){ transition-delay:.35s; }
+.visible .imgs .frame:nth-child(3){ transition-delay:.5s; }
+.visible .imgs .frame:nth-child(4){ transition-delay:.65s; }
+.visible .imgs .frame{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* --- botrow / toprow frames inside imgs --- */
+.imgs .botrow .frame,
+.imgs .toprow .frame,
+.imgs .col .frame{
+  opacity:0;
+  transform:translateY(20px);
+}
+.visible .imgs .botrow .frame,
+.visible .imgs .toprow .frame,
+.visible .imgs .col .frame{
+  opacity:1;
+  transform:translateY(0);
+}
+.visible .imgs .botrow .frame:nth-child(1),
+.visible .imgs .toprow .frame:nth-child(1),
+.visible .imgs .col .frame:nth-child(1){ transition-delay:.3s; }
+.visible .imgs .botrow .frame:nth-child(2),
+.visible .imgs .toprow .frame:nth-child(2),
+.visible .imgs .col .frame:nth-child(2){ transition-delay:.45s; }
+
+/* --- tags fade --- */
+.tags span{
+  opacity:0;
+  transform:translateY(6px);
+  transition:opacity .5s ease, transform .5s ease;
+}
+.visible .tags span{
+  opacity:1;
+  transform:translateY(0);
+}
+.visible .tags span:nth-child(1){ transition-delay:.3s; }
+.visible .tags span:nth-child(2){ transition-delay:.38s; }
+.visible .tags span:nth-child(3){ transition-delay:.46s; }
+.visible .tags span:nth-child(4){ transition-delay:.54s; }
+
+/* --- feature overlay entrance --- */
+.lay-feature .overlay{
+  opacity:0;
+  transform:translateY(30px);
+  transition:opacity 1s cubic-bezier(.16,1,.3,1), transform 1s cubic-bezier(.16,1,.3,1);
+  transition-delay:.2s;
+}
+.lay-feature.visible .overlay{
+  opacity:1;
+  transform:translateY(0);
+}
+.lay-feature .inset{
+  opacity:0;
+  transform:translateY(20px) rotate(-1deg);
+  transition:opacity .8s cubic-bezier(.16,1,.3,1), transform .8s cubic-bezier(.16,1,.3,1);
+  transition-delay:.5s;
+}
+.lay-feature.visible .inset{
+  opacity:1;
+  transform:translateY(0) rotate(0);
+}
+
+/* --- statement text --- */
+.statement p.big{
+  opacity:0;
+  transform:translateY(18px);
+  transition:opacity .9s cubic-bezier(.16,1,.3,1), transform .9s cubic-bezier(.16,1,.3,1);
+  transition-delay:.1s;
+}
+.statement.visible p.big{
+  opacity:1;
+  transform:translateY(0);
+}
+.statement .sub{
+  opacity:0;
+  transition:opacity .7s ease .4s;
+}
+.statement.visible .sub{
+  opacity:1;
+}
+.statement .sign{
+  opacity:0;
+  transition:opacity .6s ease .6s;
+}
+.statement.visible .sign{
+  opacity:1;
+}
+
+/* --- page number & footer fade --- */
+.page .pageno,
+.page .foot-brand{
+  opacity:0;
+  transition:opacity .5s ease .5s;
+}
+.page.visible .pageno,
+.page.visible .foot-brand,
+.cover .pageno,
+.cover .foot-brand{
+  opacity:1;
+}
+
+/* --- smooth scroll --- */
+html{ scroll-behavior:smooth; }
+
+/* --- disable animations in print --- */
+@media print{
+  .reveal, .crow, .titleblock, .imgs .frame, .tags span,
+  .lay-feature .overlay, .lay-feature .inset,
+  .statement p.big, .statement .sub, .statement .sign,
+  .page .pageno, .page .foot-brand,
+  .imgs .botrow .frame, .imgs .toprow .frame, .imgs .col .frame{
+    opacity:1 !important;
+    transform:none !important;
+    transition:none !important;
+    animation:none !important;
+  }
+}

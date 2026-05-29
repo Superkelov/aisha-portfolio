@@ -313,6 +313,27 @@
     window.addEventListener('load', fit);
     fit();
   })();
+
+  // Scroll-triggered reveal animations
+  (function () {
+    var pages = document.querySelectorAll('.page:not(.cover)');
+    if (!('IntersectionObserver' in window)) {
+      pages.forEach(function (p) { p.classList.add('visible'); });
+      return;
+    }
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.18 });
+    pages.forEach(function (p) { observer.observe(p); });
+
+    // Cover is always visible (uses CSS keyframes)
+    document.querySelector('.cover').classList.add('visible');
+  })();
 </script>
 </body>
 </html>
