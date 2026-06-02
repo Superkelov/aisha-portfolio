@@ -318,6 +318,7 @@
 <script>
 (function(){
   var scaler = document.getElementById('scaler');
+  var wrap = document.getElementById('wrap');
   var pages = document.querySelectorAll('.page');
   var cursor = document.getElementById('cursor');
   var navDots = document.getElementById('navDots');
@@ -326,6 +327,15 @@
   var currentPage = 0;
   var cursorX = 0, cursorY = 0, cursorRealX = 0, cursorRealY = 0;
   var lightboxOpen = false;
+
+  // ---- Set body height so vertical scroll drives horizontal motion ----
+  function setBodyHeight(){
+    var totalW = 0;
+    pages.forEach(function(p){ totalW += p.offsetWidth; });
+    document.body.style.height = (totalW - window.innerWidth + window.innerHeight) + 'px';
+  }
+  setBodyHeight();
+  window.addEventListener('resize', setBodyHeight);
 
   // ---- Build nav dots ----
   pages.forEach(function(p, i){
@@ -336,20 +346,12 @@
     label.textContent = p.getAttribute('data-screen-label') || ('Page ' + (i+1));
     dot.appendChild(label);
     dot.addEventListener('click', function(){
-      pages[i].scrollIntoView({ behavior:'smooth', block:'nearest', inline:'start' });
+      var targetScroll = i * window.innerWidth;
+      window.scrollTo({ top: targetScroll, behavior:'smooth' });
     });
     navDots.appendChild(dot);
   });
   var dots = navDots.querySelectorAll('.nav-dot');
-
-  // ---- Scroll → wheel redirect ----
-  scaler.addEventListener('wheel', function(e){
-    if (lightboxOpen) return;
-    if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
-      e.preventDefault();
-      scaler.scrollLeft += e.deltaY * 1.5;
-    }
-  }, { passive: false });
 
   // ---- Keyboard navigation ----
   document.addEventListener('keydown', function(e){
@@ -361,33 +363,44 @@
     }
     if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
       e.preventDefault();
-      if (currentPage < totalPages - 1) pages[currentPage + 1].scrollIntoView({ behavior:'smooth', inline:'start' });
+      if (currentPage < totalPages - 1) window.scrollTo({ top: (currentPage + 1) * window.innerWidth, behavior:'smooth' });
     } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
       e.preventDefault();
-      if (currentPage > 0) pages[currentPage - 1].scrollIntoView({ behavior:'smooth', inline:'start' });
+      if (currentPage > 0) window.scrollTo({ top: (currentPage - 1) * window.innerWidth, behavior:'smooth' });
     }
   });
 
-  // ---- Intersection Observer ----
-  var io = new IntersectionObserver(function(entries){
-    entries.forEach(function(e){
-      var idx = Array.prototype.indexOf.call(pages, e.target);
-      if (e.isIntersecting && e.intersectionRatio > 0.5) {
-        currentPage = idx;
-        e.target.classList.add('visible');
-        dots.forEach(function(d,i){ d.classList.toggle('active', i === idx); });
+  // ---- Vertical scroll → horizontal translate ----
+  function updateHorizontal(){
+    var scrollY = window.pageYOffset;
+    wrap.style.transform = 'translateX(' + (-scrollY) + 'px)';
+
+    // Determine current page
+    var pageW = window.innerWidth;
+    var idx = Math.round(scrollY / pageW);
+    idx = Math.max(0, Math.min(idx, totalPages - 1));
+    if (idx !== currentPage) {
+      currentPage = idx;
+      dots.forEach(function(d,i){ d.classList.toggle('active', i === idx); });
+    }
+
+    // Toggle visible class
+    pages.forEach(function(p, i){
+      var pageLeft = i * pageW - scrollY;
+      if (pageLeft > -pageW && pageLeft < pageW) {
+        p.classList.add('visible');
       }
     });
-  }, { root: scaler, threshold: 0.5 });
-  pages.forEach(function(p){ io.observe(p); });
-  pages[0].classList.add('visible');
 
-  // ---- Progress bar ----
-  scaler.addEventListener('scroll', function(){
-    var maxScroll = scaler.scrollWidth - scaler.clientWidth;
-    var pct = maxScroll > 0 ? (scaler.scrollLeft / maxScroll) * 100 : 0;
+    // Progress bar
+    var maxScroll = document.body.scrollHeight - window.innerHeight;
+    var pct = maxScroll > 0 ? (scrollY / maxScroll) * 100 : 0;
     progressBar.style.width = pct + '%';
-  });
+  }
+
+  window.addEventListener('scroll', updateHorizontal);
+  pages[0].classList.add('visible');
+  updateHorizontal();
 
   // ---- Custom cursor ----
   document.addEventListener('mousemove', function(e){
@@ -420,14 +433,15 @@
   // ---- Parallax ----
   var parallaxStrength = 12;
   function updateParallax(){
-    var viewW = scaler.clientWidth;
-    pages.forEach(function(page){
-      var rect = page.getBoundingClientRect();
-      if (rect.right < -viewW || rect.left > viewW * 2) return;
-      var progress = rect.left / viewW;
+    var viewW = window.innerWidth;
+    var scrollY = window.pageYOffset;
+    pages.forEach(function(page, i){
+      var pageLeft = i * viewW - scrollY;
+      if (pageLeft < -viewW || pageLeft > viewW * 2) return;
+      var progress = pageLeft / viewW;
       var imgs = page.querySelectorAll('.frame img');
-      imgs.forEach(function(img, i){
-        var offset = progress * parallaxStrength * (1 + i * 0.2);
+      imgs.forEach(function(img, j){
+        var offset = progress * parallaxStrength * (1 + j * 0.2);
         img.style.transform = 'translateX(' + offset + 'px)';
       });
     });
